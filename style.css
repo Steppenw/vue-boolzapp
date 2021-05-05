@@ -5,6 +5,27 @@
   font-family: sans-serif;
 }
 
+aside > *:not(.chats), aside > .chats > .content, 
+section.singleChat > .userName, section.singleChat > .sendMsg {
+  padding: 8px;
+}
+
+aside > nav, section.singleChat > .userName, 
+.sendMsg {
+  background-color: #ededed;
+  align-items: center;
+}
+
+.rounded {
+  height: 30px;
+  border: none;
+  border-radius: 15px;
+}
+
+i {
+  color: #7f7f7f;
+}
+
 .top-bg {
   position: absolute;
   top: 0;
@@ -14,6 +35,7 @@
   z-index: -1;
 }
 
+/*MAIN*/
 main {
   width: 85%;
   height: 90vh;
@@ -32,26 +54,13 @@ main > aside {
   overflow: auto;
 }
 
-aside > *:not(.chats) {
-  padding: 8px;
-}
-
 /*ASIDE-NAV*/
-aside > nav {
-  background-color: #ededed;
-  align-items: center;
-}
-
-aside > nav > img {
+aside > nav > img, section.singleChat img {
   width: 50px;
 }
 
 .empty {
   flex-grow: 1;
-}
-
-aside > nav > i {
-  color: #7f7f7f;
 }
 
 /*ASIDE-NOTIFICATIONS*/
@@ -67,6 +76,9 @@ aside > .notifications > .bell {
   border-radius: 50%;
   background-color: white;
   line-height: 50px;
+}
+
+.bell > i {
   color: #9ee1fe;
 }
 
@@ -77,9 +89,6 @@ aside > .search {
 
 aside > .search > input {
   width: 100%;
-  height: 30px;
-  border: none;
-  border-radius: 15px;
 }
 
 /*ASIDE-CHATS*/
@@ -91,17 +100,34 @@ aside > .chats {
 aside > .chats > .content {
   align-items: center;
   border-bottom: 1px solid lightgrey;
-  padding: 8px;
 }
 
-main > section {
+/*MAIN-SINGLE_CHAT*/
+main > section.singleChat {
   flex-grow: 1;
 }
 
-/*UTILITIES*/
-.border {
-  border: 1px solid lightgrey;
+/*USER_NAME*/
+section.singleChat > .userName {
+  border-left: 1px solid lightgrey;
 }
+
+/*MESSAGES*/
+section.singleChat > .messages {
+  flex-grow: 1;
+  background: url('img/mine.jpg');
+}
+
+/*SEND_MSG*/
+.sendMsg > input {
+  flex-grow: 1;
+  margin: 0 20px;
+}
+
+/*UTILITIES*/
+/*.border {
+  border: 1px solid lightgrey;
+}*/
 
 .flex {
   display: flex;

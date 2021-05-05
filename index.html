@@ -15,7 +15,7 @@
 
   <main class="flex border" id="app">
 
-    <!-- Main-Aside -->
+    <!-- MAIN-ASIDE -->
     <aside class="flex-col">
       <nav class="flex">
         <img src="img/avatar_1.jpg" alt="avatar">
@@ -34,10 +34,10 @@
         </div>
       </div>
       <div class="search">
-        <input type="text" placeholder="Cerca o inizia una nuova chat">
+        <input class="rounded" type="text" placeholder="Cerca o inizia una nuova chat">
       </div>
       <div class="chats">
-        <div class="content flex" v-for="user in chatsList">
+        <div class="content flex" v-for="(user, index) in chatsList" :key="index" @click="chatWith(user)">
           <img :src="getAvatar(user)" alt="avatar">
           <div class="flex-col ml-10">
             <span class="fsz-15"><strong>{{user.name}}</strong></span>
@@ -46,9 +46,29 @@
         </div>
       </div>
     </aside>
-    <!-- /Main-Aside -->
+    <!-- /MAIN-ASIDE -->
     
-    <section class="border"></section>
+    <!-- MAIN-SINGLE_CHAT -->
+    <section class="singleChat flex-col">
+      <div class="userName flex">
+        <img :src="`img/avatar${currentChat.avatar}.jpg`" alt="avatar">
+        <div class="flex-col ml-10">
+          <span class="fsz-15"><strong>{{currentChat.name}}</strong></span>
+          <span></span>
+        </div>
+        <div class="empty"></div>
+        <i class="fa fa-search m-10" aria-hidden="true"></i>
+        <i class="fa fa-paperclip fa-lg m-10" aria-hidden="true"></i>
+        <i class="fa fa-bars m-10" aria-hidden="true"></i>
+      </div>
+      <div class="messages"></div>
+      <div class="sendMsg flex">
+        <i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>
+        <input class="rounded" type="text">
+        <i class="fa fa-microphone fa-lg" aria-hidden="true"></i>
+      </div>
+    </section>
+    <!-- /MAIN-SINGLE_CHAT -->
 
   </main>
 
