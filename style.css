@@ -102,6 +102,10 @@ aside > .chats > .content {
   border-bottom: 1px solid lightgrey;
 }
 
+.content.current {
+  background-color: lightgrey;
+}
+
 /*MAIN-SINGLE_CHAT*/
 main > section.singleChat {
   flex-grow: 1;
@@ -116,6 +120,28 @@ section.singleChat > .userName {
 section.singleChat > .messages {
   flex-grow: 1;
   background: url('img/mine.jpg');
+  padding: 30px;
+  position: relative;
+}
+
+.messages > .msg {
+  margin: 10px 0;
+}
+
+.msg > .msg-text {
+  width: 200px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.sent {
+  background-color: lightgreen;
+  align-self: flex-end;
+}
+
+.received {
+  background-color: white;
+  align-self: flex-start;
 }
 
 /*SEND_MSG*/

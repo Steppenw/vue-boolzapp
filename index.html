@@ -37,7 +37,7 @@
         <input class="rounded" type="text" placeholder="Cerca o inizia una nuova chat">
       </div>
       <div class="chats">
-        <div class="content flex" v-for="(user, index) in chatsList" :key="index" @click="chatWith(user)">
+        <div class="content flex" v-for="(user, index) in chatsList" :key="index" @click="chatWith(user)" :class="{current: user.id === currentChat.id}">
           <img :src="getAvatar(user)" alt="avatar">
           <div class="flex-col ml-10">
             <span class="fsz-15"><strong>{{user.name}}</strong></span>
@@ -61,7 +61,11 @@
         <i class="fa fa-paperclip fa-lg m-10" aria-hidden="true"></i>
         <i class="fa fa-bars m-10" aria-hidden="true"></i>
       </div>
-      <div class="messages"></div>
+      <div class="messages">
+        <div class="msg flex-col" v-for="(message, index) in currentChat.messages" :key="index">
+          <span class="msg-text" :class="{received: message.status === 'received', sent: message.status === 'sent'}">{{message.text}}</span>
+        </div>
+      </div>
       <div class="sendMsg flex">
         <i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>
         <input class="rounded" type="text">

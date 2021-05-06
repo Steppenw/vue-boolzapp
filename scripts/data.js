@@ -1,6 +1,7 @@
 const globalChatsList = [
     
     {
+        id: '0',
         name: 'Michele',
         avatar: '_1',
         visible: true,
@@ -23,6 +24,7 @@ const globalChatsList = [
         ]
     },
     {
+        id: '1,',
         name: 'Fabio',
         avatar: '_2',
         visible: true,
@@ -45,6 +47,7 @@ const globalChatsList = [
         ]
     }, 
     {
+        id: '2',
         name: 'Samuele',
         avatar: '_3',
         visible: true,
@@ -67,6 +70,7 @@ const globalChatsList = [
         ]
     },
     {
+        id: '3',
         name: 'Luisa',
         avatar: '_6',
         visible: true,
@@ -84,8 +88,9 @@ const globalChatsList = [
         ]
     },
     {
+        id: '4',
         name: 'Fabio',
-        avatar: '_2',
+        avatar: '_4',
         visible: true,
         messages: [
             {
@@ -106,8 +111,9 @@ const globalChatsList = [
         ]
     }, 
     {
+        id: '5',
         name: 'Samuele',
-        avatar: '_3',
+        avatar: '_5',
         visible: true,
         messages: [
             {
