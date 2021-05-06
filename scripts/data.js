@@ -25,7 +25,7 @@ const globalChatsList = [
     },
     {
         id: '1,',
-        name: 'Fabio',
+        name: 'Massimo',
         avatar: '_2',
         visible: true,
         messages: [

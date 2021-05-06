@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
   <title>BoolzApp</title>
 </head>
@@ -34,10 +35,12 @@
         </div>
       </div>
       <div class="search">
-        <input class="rounded" type="text" placeholder="Cerca o inizia una nuova chat">
+        <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+        <input class="rounded" type="text" v-model="searchText" placeholder="Cerca o inizia una nuova chat" @keyup.esc="searchText = ''">
+        <i class="fa fa-times" aria-hidden="true" v-if="searchText" @click="searchText = ''"></i>
       </div>
       <div class="chats">
-        <div class="content flex" v-for="(user, index) in chatsList" :key="index" @click="chatWith(user)" :class="{current: user.id === currentChat.id}">
+        <div class="content flex" v-for="(user, index) in filteredChatsList" :key="index" @click="chatWith(user)" :class="{current: user.id === currentChat.id}">
           <img :src="getAvatar(user)" alt="avatar">
           <div class="flex-col ml-10">
             <span class="fsz-15"><strong>{{user.name}}</strong></span>
@@ -61,14 +64,14 @@
         <i class="fa fa-paperclip fa-lg m-10" aria-hidden="true"></i>
         <i class="fa fa-bars m-10" aria-hidden="true"></i>
       </div>
-      <div class="messages">
+      <div class="messages" ref="autoScrollMessages">
         <div class="msg flex-col" v-for="(message, index) in currentChat.messages" :key="index">
           <span class="msg-text" :class="{received: message.status === 'received', sent: message.status === 'sent'}">{{message.text}}</span>
         </div>
       </div>
       <div class="sendMsg flex">
         <i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>
-        <input class="rounded" type="text">
+        <input v-model="newMsg" class="rounded" type="text" placeholder="Scrivi un messaggio" @keyup.enter="sendMessage">
         <i class="fa fa-microphone fa-lg" aria-hidden="true"></i>
       </div>
     </section>

@@ -85,10 +85,24 @@ aside > .notifications > .bell {
 /*ASIDE-SEARCH*/
 aside > .search {
   background-color: #ededed;
+  position: relative;
+}
+
+.search > i.fa-search {
+  position: absolute;
+  top: 15px;
+  left: 10px;
 }
 
 aside > .search > input {
   width: 100%;
+  padding: 0 30px;
+}
+
+.search > i.fa-times {
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }
 
 /*ASIDE-CHATS*/
@@ -121,7 +135,7 @@ section.singleChat > .messages {
   flex-grow: 1;
   background: url('img/mine.jpg');
   padding: 30px;
-  position: relative;
+  overflow: auto;
 }
 
 .messages > .msg {
@@ -148,6 +162,7 @@ section.singleChat > .messages {
 .sendMsg > input {
   flex-grow: 1;
   margin: 0 20px;
+  padding: 0 10px;
 }
 
 /*UTILITIES*/
