@@ -2,11 +2,23 @@ const app = new Vue({
     el: "#app",
     data: {
         chatsList: globalChatsList,
-        currentChat: {},
+        //currentChat: {},
+        currentChat: globalChatsList[2],
         searchText: "",
         newMsg: ""
     },
     computed: {
+        currentChatLastAccess() {
+            /*const inMsgs = this.currentChat.messages.filter(function(message) {
+                return message.status === 'received';
+            });*/
+            const inMsgs = this.currentChat.messages.filter((message) => message.status === 'received');
+            //console.log(inMsgs);
+            const DateLastInMsgs = inMsgs[inMsgs.length - 1].date;
+            //console.log(DateLastInMsgs);
+            return this.time(DateLastInMsgs);
+        },
+        
         filteredChatsList() {
             return this.chatsList.filter((element) => {
                 //return element.name.toLowerCase().includes(this.searchText.toLowerCase());
@@ -21,17 +33,22 @@ const app = new Vue({
             this.currentChat = user;
         },
 
+        time(stringDate) {
+            return (moment(stringDate, 'DD/MM/YYYY HH:mm:ss').format('HH:mm'));
+        },
+
         sendMessage() {
             const newMessage = {
-                date: '',
+                date: moment().format('DD/MM/YYYY HH:mm:ss'),
                 text: this.newMsg,
                 status: 'sent'
             };
 
-            this.currentChat.messages.push(newMessage);
-            //fix: quando cambi 'currentChat' prima del tempo settato per l'invio di 'newInMsg'
-            //const activeChat = this.currentChat;
-            //activeChat.messages.push(newMessage);
+            //this.currentChat.messages.push(newMessage);
+
+            //fix per quando varii 'currentChat' prima dell'arrivo di 'newInMsg'
+            const ThisChat = this.currentChat;
+            ThisChat.messages.push(newMessage);
 
             this.newMsg = "";
 
@@ -40,16 +57,16 @@ const app = new Vue({
             setTimeout(() => {
                 //Non fosse 'arrow' non vi sarebbe accesso al 'this' di Vue
                 const newInMsg = {
-                    date: '',
+                    date: moment().format('DD/MM/YYYY HH:mm:ss'),
                     text: 'Ok!',
                     status: 'received'
                 }
 
-                this.currentChat.messages.push(newInMsg);
-                //activeChat.messages.push(newInMsg);
+                //this.currentChat.messages.push(newInMsg);
+                ThisChat.messages.push(newInMsg);
 
                 this.autoScrollMessages();
-            }, 1000);
+            }, 3000);
         },
 
         autoScrollMessages() {
@@ -60,7 +77,7 @@ const app = new Vue({
             
         }
     },
-    mounted() {
+    /*mounted() {
         this.currentChat = this.chatsList[2];
-    }
+    }*/
 });

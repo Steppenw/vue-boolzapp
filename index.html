@@ -57,7 +57,7 @@
         <img :src="`img/avatar${currentChat.avatar}.jpg`" alt="avatar">
         <div class="flex-col ml-10">
           <span class="fsz-15"><strong>{{currentChat.name}}</strong></span>
-          <span></span>
+          <span class="lastAccess">Ultimo accesso alle{{currentChatLastAccess}}</span>
         </div>
         <div class="empty"></div>
         <i class="fa fa-search m-10" aria-hidden="true"></i>
@@ -66,7 +66,9 @@
       </div>
       <div class="messages" ref="autoScrollMessages">
         <div class="msg flex-col" v-for="(message, index) in currentChat.messages" :key="index">
-          <span class="msg-text" :class="{received: message.status === 'received', sent: message.status === 'sent'}">{{message.text}}</span>
+          <span class="msg-text" :class="{received: message.status === 'received', sent: message.status === 'sent'}">{{message.text}}
+            <span class="time">{{time(message.date)}}</span>
+          </span>
         </div>
       </div>
       <div class="sendMsg flex">
