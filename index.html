@@ -31,7 +31,7 @@
         </div>
         <div class="flex-col ml-10">
           <span class="fsz-15"><strong>Ricevi notifiche di nuovi messaggi</strong></span>
-          <a class="fsz-15" href="">Attiva notifiche desktop</a>
+          <a class="fsz-15" href="" @click.prevent>Attiva notifiche desktop</a>
         </div>
       </div>
       <div class="search">
@@ -44,7 +44,7 @@
           <img :src="getAvatar(user)" alt="avatar">
           <div class="flex-col ml-10">
             <span class="fsz-15"><strong>{{user.name}}</strong></span>
-            <span></span>
+            <span class="fsz-14">{{getLastMsg(user.messages)}}</span>
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@
         <img :src="`img/avatar${currentChat.avatar}.jpg`" alt="avatar">
         <div class="flex-col ml-10">
           <span class="fsz-15"><strong>{{currentChat.name}}</strong></span>
-          <span class="lastAccess">Ultimo accesso alle{{currentChatLastAccess}}</span>
+          <span class="fsz-14">{{currentChatLastAccess}}</span>
         </div>
         <div class="empty"></div>
         <i class="fa fa-search m-10" aria-hidden="true"></i>
@@ -66,15 +66,25 @@
       </div>
       <div class="messages" ref="autoScrollMessages">
         <div class="msg flex-col" v-for="(message, index) in currentChat.messages" :key="index">
-          <span class="msg-text" :class="{received: message.status === 'received', sent: message.status === 'sent'}">{{message.text}}
+          <div class="msg-text" tabindex="-1"
+          :class="{received: message.status === 'received', sent: message.status === 'sent'}" 
+          @click="onMsgClick(message, $event)" @blur="onFocusLoss(message)">{{message.text}}
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
             <span class="time">{{time(message.date)}}</span>
-          </span>
+            <span class="popup" v-if="message.showPopup" @click.stop="onPopupClick(message)">
+              <ul>
+                <li>Info messaggio</li>
+                <li @click="onDeleteClick(index)">Elimina messaggio</li>
+              </ul>
+            </span>
+          </div>
         </div>
       </div>
       <div class="sendMsg flex">
         <i class="fa fa-smile-o fa-lg" aria-hidden="true"></i>
         <input v-model="newMsg" class="rounded" type="text" placeholder="Scrivi un messaggio" @keyup.enter="sendMessage">
-        <i class="fa fa-microphone fa-lg" aria-hidden="true"></i>
+        <i v-if="newMsg === ''" class="fa fa-microphone fa-lg" aria-hidden="true"></i>
+        <i v-else class="fa fa-paper-plane" aria-hidden="true" @click="sendMessage"></i>
       </div>
     </section>
     <!-- /MAIN-SINGLE_CHAT -->
