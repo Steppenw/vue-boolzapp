@@ -120,10 +120,6 @@ aside > .chats > .content {
   background-color: lightgrey;
 }
 
-.lastAccess {
-  font-size: 14px;
-}
-
 /*MAIN-SINGLE_CHAT*/
 main > section.singleChat {
   flex-grow: 1;
@@ -148,9 +144,20 @@ section.singleChat > .messages {
 
 .msg > .msg-text {
   width: 150px;
-  padding: 10px 10px 15px;
+  padding: 15px 10px;
   border-radius: 10px;
   position: relative;
+}
+
+.msg-text > i.fa-angle-down {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  display: none;
+}
+
+.msg-text:hover > i.fa-angle-down {
+  display: block;
 }
 
 .msg-text.sent {
@@ -170,11 +177,35 @@ section.singleChat > .messages {
   font-size: 10px;
 }
 
+.msg-text > .popup {
+  position: absolute;
+  left: 10px;
+  width: 100%;
+  background-color: lavender;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  padding: 0 10px;
+  font-size: 15px;
+  border-radius: 5px;
+}
+
+.popup > ul {
+  list-style-type: none;
+}
+
+.popup ul li {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
 /*SEND_MSG*/
 .sendMsg > input {
   flex-grow: 1;
   margin: 0 20px;
   padding: 0 10px;
+}
+
+.sendMsg > i.fa-paper-plane {
+  cursor: pointer;
 }
 
 /*UTILITIES*/
@@ -205,4 +236,8 @@ section.singleChat > .messages {
 
 .fsz-15 {
   font-size: 15px;
+}
+
+.fsz-14 {
+  font-size: 14px;
 }

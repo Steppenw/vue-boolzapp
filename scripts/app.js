@@ -14,9 +14,12 @@ const app = new Vue({
             });*/
             const inMsgs = this.currentChat.messages.filter((message) => message.status === 'received');
             //console.log(inMsgs);
+            if (inMsgs.length === 0) {
+                return 'Dati ultimo accesso non disponibili.';
+            }
             const DateLastInMsgs = inMsgs[inMsgs.length - 1].date;
             //console.log(DateLastInMsgs);
-            return this.time(DateLastInMsgs);
+            return 'Ultimo accesso alle ' + this.time(DateLastInMsgs);
         },
         
         filteredChatsList() {
@@ -75,6 +78,39 @@ const app = new Vue({
                 this.$refs.autoScrollMessages.scrollTop = this.$refs.autoScrollMessages.scrollHeight;
             });
             
+        },
+
+        onMsgClick(message, event) {
+            this.$set(message, "showPopup", true);
+            event.currentTarget.focus();
+            //event.stopPropagation();
+        },
+
+        onFocusLoss(message) {
+            message.showPopup = false;
+        },
+
+        onPopupClick(message) {
+            this.onFocusLoss(message);
+        },
+
+        onDeleteClick(index) {
+            this.currentChat.messages.splice(index, 1);
+        },
+
+        getLastMsg(messages) {
+            if (messages.length === 0) {
+                return 'Non ci sono messaggi.';
+            }
+
+            const lastMsg = messages[messages.length - 1];
+            const lastMsgDate = this.time(lastMsg.date);
+            let truncatedMsg = lastMsg.text.slice(0, 20);
+            
+            if (lastMsg.text.length > 20) {
+                truncatedMsg += '...';
+            }
+            return truncatedMsg + ' - ' + lastMsgDate;
         }
     },
     /*mounted() {
